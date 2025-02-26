@@ -1,4 +1,4 @@
-name: Create and Commit a File
+name: Teszt workflow
 
 on:
   push:
@@ -6,23 +6,19 @@ on:
       - Actions_test1
 
 jobs:
-  create-file:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Create a text file
-        run: echo "Ezt a fájlt az Actions generálta $(date)" > generated_file.txt
+      - name: Generálj egy fájlt
+        run: echo "Automatikusan generált fájl" > generated_file.txt
 
-      - name: Commit and push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit és Push
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add generated_file.txt
-          git commit -m "Automatikusan generált fájl" || echo "Nincs változás, nincs commit"
-          git push
-
+          git commit -m "Automatikusan generált fájl"
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/gezakeraly/Test_for_ai_assistent.git
