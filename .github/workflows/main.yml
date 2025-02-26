@@ -1,0 +1,28 @@
+name: Create and Commit a File
+
+on:
+  push:
+    branches:
+      - Actions_test1
+
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create a text file
+        run: echo "Ezt a fájlt az Actions generálta: $(date)" > generated_file.txt
+
+      - name: Commit and push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add generated_file.txt
+          git commit -m "Automatikusan generált fájl" || echo "Nincs változás, nincs commit"
+          git push
+
