@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 name: Teszt workflow
 
 on:
@@ -33,4 +31,4 @@ jobs:
           git add /mnt/c/Users/szebe/OneDrive/Asztali\ gép/ÖNLAB/AI_for_ai_assistent/src/todo_app.jsx
           git commit -m "Automatikusan generált React Todo alkalmazás [skip ci]"
           git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/gezakeraly/Test_for_ai_assistent.git
->>>>>>> Stashed changes
+
