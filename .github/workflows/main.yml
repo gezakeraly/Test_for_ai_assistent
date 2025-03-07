@@ -11,15 +11,21 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Generálj egy fájlt
-        run: echo "Automatikusan generált fájl" > generated_file3.txt
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run generate_app.py
+        run: python src/generate_app.py
 
       - name: Commit és Push
-
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add generated_file3.txt
-          git commit -m "Automatikusan generált fájl [skip ci]"
+          git add todo_app.jsx
+          git commit -m "Automatikusan generált React Todo alkalmazás [skip ci]"
           git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/gezakeraly/Test_for_ai_assistent.git
-
