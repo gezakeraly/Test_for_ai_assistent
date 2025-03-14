@@ -28,9 +28,6 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
-        run: pip install -r AI_for_ai_assistent/requirements.txt
-
       - name: Run generate_app.py
         run: python AI_for_ai_assistent/src/generate_app.py
 
