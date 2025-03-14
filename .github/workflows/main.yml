@@ -2,7 +2,10 @@ name: Teszt workflow
 
 on:
   issues:
-    types: [opened]
+    types:
+      - opened
+      - edited
+      - deleted
 
 jobs:
   build:
