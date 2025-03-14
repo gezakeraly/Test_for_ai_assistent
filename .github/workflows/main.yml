@@ -21,7 +21,7 @@ jobs:
         with:
           repository: 'gezakeraly/AI_for_ai_assistent'
           path: 'AI_for_ai_assistent'
-          token: ${{ secrets.GH_PAT_PY }}
+          token: ${{ secrets.GH_PAT }}
 
       - name: Set up Python
         uses: actions/setup-python@v4
