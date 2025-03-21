@@ -27,6 +27,8 @@ jobs:
           python-version: '3.x'
 
       - name: Run generate_app.py
+        env:
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
         run: |
           cd AI_for_ai_assistent/src  # Váltás a szkript mappájába
           python generate_app.py
