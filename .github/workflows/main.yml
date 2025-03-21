@@ -27,7 +27,9 @@ jobs:
           python-version: '3.x'
 
       - name: Run generate_app.py
-        run: python AI_for_ai_assistent/src/generate_app.py
+        run: |
+          cd AI_for_ai_assistent/src  # Váltás a szkript mappájába
+          python generate_app.py
 
       - name: Checkout repo for generated files
         uses: actions/checkout@v4
@@ -38,6 +40,7 @@ jobs:
 
       - name: Copy generated files
         run: |
+          mkdir -p Test_for_ai_assistent/generated_code  # Ha a célmappa nem létezik, hozza létre
           cp -r AI_for_ai_assistent/generated_code/* Test_for_ai_assistent/generated_code/
 
       - name: Commit és Push
