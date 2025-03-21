@@ -40,7 +40,6 @@ jobs:
 
       - name: Copy generated files
         run: |
-          mkdir -p Test_for_ai_assistent/generated_code  # Ha a célmappa nem létezik, hozza létre
           cp -r AI_for_ai_assistent/generated_code/* Test_for_ai_assistent/generated_code/
 
       - name: Commit és Push
