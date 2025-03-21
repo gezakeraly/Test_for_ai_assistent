@@ -4,9 +4,7 @@ on:
   issues:
     types:
       - opened
-      - labeled
       - edited
-      - deleted
 
 jobs:
   build:
@@ -29,14 +27,24 @@ jobs:
           python-version: '3.x'
 
       - name: Run generate_app.py
-        env:
-            OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python AI_for_ai_assistent/src/generate_app.py
+
+      - name: Checkout repo for generated files
+        uses: actions/checkout@v4
+        with:
+          repository: 'gezakeraly/Test_for_ai_assistent'
+          path: 'Test_for_ai_assistent'
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Copy generated files
+        run: |
+          cp -r AI_for_ai_assistent/generated_code/* Test_for_ai_assistent/generated_code/
 
       - name: Commit és Push
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add AI_for_ai_assistent/todo_app.txt
+          cd Test_for_ai_assistent/generated_code
+          git add .
           git commit -m "Automatikusan generált React Todo alkalmazás [skip ci]" || echo "Nincs változás."
           git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/gezakeraly/Test_for_ai_assistent.git
